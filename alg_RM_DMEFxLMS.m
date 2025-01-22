@@ -1,6 +1,6 @@
-%% RM_DMEFxLMS ALGORTIHM v1: 
-%  Versi髇 donde calculamos las se馻les d_v de manera distribuida incremental 
-%  Igual a la versi髇 centralizada
+%% RM_DMEFxLMS ALGORTIHM: 
+%  Versi贸n donde calculamos las se帽ales d_v de manera distribuida incremental 
+%  Igual a la versi贸n centralizada
 
 function out =alg_RM_DMEFxLMS_v1(conf, IN, OUT)
 
@@ -23,13 +23,13 @@ O         = OUT.mopt;
 [Kv, O_size]=size(O);
 P=O_size/Km;
 
-%%  C醠culo de se馻l deseada
+%%  C谩lculo de se帽al deseada
 d=zeros(ITE,Km);
 for k=1:Km
     d(:,k)=filter(CPRI_m(:,k),1,in);
 end
 
-%% Inicializaci髇 de variables
+%% Inicializaci贸n de variables
 w=zeros(L*J,num_nodos);	
 w_eval=zeros(L,num_nodos,ITE);	
 buff_L=zeros(L,num_nodos);
@@ -119,7 +119,7 @@ for cont=1:ITE
         buff_L(:,nodo)=[x; buff_L(1:L-1,nodo)]; 
         y(nodo)=y(nodo)+w_nodo'*buff_L(:,nodo); 
 
-        %% ACTUALIZACI覰 COEFICIENTES .....................................       
+        %% ACTUALIZACI脫N COEFICIENTES .....................................       
         w(:,nodo)=w_ant-mu_M(nodo)*v(:,nodo)*e_v_nodo;
         w_eval(:,nodo,cont)=w(1+L*(nodo-1):L*nodo,nodo);          
 
@@ -133,13 +133,13 @@ for cont=1:ITE
 
    end
    
-    % Difusi髇 de coeficientes
+    % Difusi贸n de coeficientes
     w=w(:,end)*ones(1,num_nodos);
  
 
 
     
-    %% PARTE AC赟TICA .........................................................
+    %% PARTE AC脷STICA .........................................................
     buff_y=[y; buff_y(1:M-1,:)];
     yf=zeros(1,Km);
     for k=1:Km
